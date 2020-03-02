@@ -53,18 +53,28 @@ startButton.addEventListener('click', pushStart)
 //Choose 1 or 2 player
 
 function choosePlayer(){
-if(event.target === onePlayer) {
+if(event.target === onePlayer) { 
     playOnePlayer()
 }   
 else if(event.target === twoPlayer) {
     playTwoPlayer()
 } 
 }
+
+onePlayer.addEventListener('click', choosePlayer)
+twoPlayer.addEventListener('click', choosePlayer)
+
+possMoves.forEach( (cells) => {
+    cells.addEventListener('click', playOnePlayer)
+})  
+
+possMoves.forEach( (cells) => {
+    cells.addEventListener('click', playTwoPlayer)
+})  
     
 //1 Player gameplay
 
 function playOnePlayer(){
-    onePlayer.disabled = true;
 
     //Player X function
 
@@ -93,11 +103,8 @@ function playOnePlayer(){
         randomMove.class = 1;
         turnStatus.textContent = "Player X's turn";
     }
-    }
-
-possMoves.forEach( (cells) => {
-    cells.addEventListener('click', playOnePlayer)
-})   
+    win()          
+}
 
 // 2 Player gameplay
     
@@ -108,7 +115,6 @@ function playTwoPlayer(event){
     if (possMoves.includes(event.target) && turnStatus.textContent === "Player X's turn"){
         let move = event.target;
         move.innerHTML = "<img src= 'https://media1.tenor.com/images/a422941a831e161317fc7d118aa7fac6/tenor.gif?itemid=4957875' height= 200px width= 200px></img>";
-        
         notPossMoves.push(move);
         xMoves.push(move);
         possMoves.push(possMoves.splice(possMoves.indexOf(move), 1) [0]);
@@ -135,9 +141,6 @@ console.log(cellZero)
 
 }
 
-possMoves.forEach( (cells) => {
-    cells.addEventListener('click', playTwoPlayer)
-})
 
 //Winning Function
 
@@ -152,16 +155,15 @@ function win() {
         }
         else if(parseInt(indexZero) + parseInt(indexOne) + parseInt(indexTwo) === 30){
             turnStatus.textContent ="Player O wins"
-        
         } 
-        else {}
-        
+        else if(possMoves === []){
+            turnStatus.textContent="It's a draw!"
+        }
     })
-    onePlayer.addEventListener('click', playOnePlayer)
-    twoPlayer.addEventListener('click', playTwoPlayer)
+
+
 
 }
-win()  
 
 
 
@@ -171,4 +173,3 @@ win()
 
 
 
-// make player 1 and player 2 variable and put them to odd or even turns
