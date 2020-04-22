@@ -1,5 +1,16 @@
+.container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+  grid-template-areas:
+  "board board board sidebar sidebar"
+  "board board board sidebar sidebar"
+  "board board board sidebar sidebar"
+}
 body {
-  background-color: rgb(255, 255, 255);
+  background-image: url('Flag.jpg');
+  background-size: cover;
   width: 1000px;
   margin: 10px auto;
   text-align: center;
@@ -7,50 +18,176 @@ body {
   user-select: none;
 }
 
-h2 {
-  font-size: 30px;
-  text-align: center;
-  height: 75px;
+#sidebar {
+  grid-area: sidebar;
 }
 
-span{
-  font-size: 75px;
-  margin-top: 20px;
+#title {
+  height: 25vh;
 }
 
-div[id^="row-"] div {
-  width: 200px;
-  height: 200px;
-  border: 1px solid red;
-  float: left;
-
+#tag {
+  color: blue;
+  font-family: "Alfa Slab One", cursive;
+  background-color: white;
+  border: 3px black solid;
+  margin: 15px;
 }
 
-div[id^="row-"] div:last-child {
-  border-right: none;
+#chooseGame {
+  color: blue;
+  font-family: "Alfa Slab One", cursive;
+  background-color: white;
+  border: 3px black solid;
+  margin: 15px;
+  height: 20px;
 }
 
-div[id^="row-"] div:first-child {
-  border-left: none;
+#one-player {
+  background-color: white;
+  color: black;
+  font-family: "Alfa Slab One", cursive;
+  margin: 15px;
 }
 
-div[id="row-1"] div{
-  border-top: none;
+#two-player {
+  background-color: white;
+  color: black;
+  font-family: "Alfa Slab One", cursive;
+  margin: 15px;
 }
 
-div[id="row-3"] div{
-    border-bottom: none;
+#turnStatus {
+  color: blue;
+  font-family: "Alfa Slab One", cursive;
+  background-color: white;
+  border: 3px black solid;
+  margin: 15px;
+  height: 20px;
 }
 
-div[id^="row-"] {
-  clear: float;
-  width: 608px;
-  box-sizing: border-box;
-  overflow: hidden;
+#start {
+  background-color: white;
+  color: black;
+  font-family: "Alfa Slab One", cursive;
+  margin: 15px;
+}
+
+#restart-button {
+  background-color: white;
+  color: black;
+  font-family: "Alfa Slab One", cursive;
+  margin: 15px;
 }
 
 div.board {
-  width: 608px;
-  overflow: hidden;
-  margin: 0 auto;
+  grid-area: board;
+  display: flex;
+
+  
+}
+
+#row-1 {
+  grid-area: board;
+  height: 200px;
+}
+
+#row-2 {
+  grid-area: board;
+  height: 200px;
+}
+
+#row-3 {
+  grid-area: board;
+  height: 200px;
+}
+
+#cell-0 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-1 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-2 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-3 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-4 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-5 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-6 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-7 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#cell-8 {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 3px;
+  border-radius: 10px;
+  border: 3px black solid;
+}
+
+#democrat {
+  margin: 10px;
+}
+
+#republican {
+  margin: 10px;
+  margin-top: 23px;
 }

@@ -11,8 +11,9 @@ let cellSeven = document.getElementById('cell-7')
 let cellEight = document.getElementById('cell-8')
 let startButton = document.getElementById('start')
 let turnStatus = document.getElementById('turnStatus')
-let onePlayer = document.getElementById('1 Player')
-let twoPlayer = document.getElementById('2 Player')
+let onePlayer = document.getElementById('one-player')
+let twoPlayer = document.getElementById('two-player')
+let restart = document.getElementById('restart')
 
 
 
@@ -38,12 +39,12 @@ let winningCombos = [        //Possible ways to win and leave your oponent in a 
 //-------------------------Start Button Function-------------------------------
 
 function pushStart(event) {
-    if (event.target === startButton){
+    if (event.target === startButton) {
         startButton.disabled = true;
-        turnStatus.textContent = "Player X's turn"
+        turnStatus.textContent = "Democrats' turn"
 
     }
-    }
+}
 
 startButton.addEventListener('click', pushStart)
 
@@ -51,119 +52,170 @@ startButton.addEventListener('click', pushStart)
 //-------------------------Gameplay Function-------------------------------------
 
 //Choose 1 or 2 player
-
-function choosePlayer(){
-if(event.target === onePlayer) { 
-    playOnePlayer()
-}   
-else if(event.target === twoPlayer) {
-    playTwoPlayer()
-} 
-}
-
 onePlayer.addEventListener('click', choosePlayer)
 twoPlayer.addEventListener('click', choosePlayer)
 
-possMoves.forEach( (cells) => {
-    cells.addEventListener('click', playOnePlayer)
-})  
+function choosePlayer() {
 
-possMoves.forEach( (cells) => {
-    cells.addEventListener('click', playTwoPlayer)
-})  
-    
+    if (event.target === onePlayer) {
+        chooseGame.textContent = "";
+        turnStatus.textContent = "Press Start Button";
+        onePlayer.disabled = true;
+        twoPlayer.disabled = true;
+        possMoves.forEach((cells) => {
+            cells.addEventListener('click', () => {
+                playOnePlayer();
+            })
+        })
+    }
+    else if (event.target === twoPlayer) {
+        chooseGame.textContent = "";
+        turnStatus.textContent = "Press Start Button";
+        onePlayer.disabled = true;
+        twoPlayer.disabled = true;
+        possMoves.forEach((cells) => {
+            cells.addEventListener('click', () => {
+                playTwoPlayer();
+            })
+        })
+    }
+}
+
 //1 Player gameplay
 
-function playOnePlayer(){
+function playOnePlayer() {
 
     //Player X function
 
-    if (possMoves.includes(event.target) && turnStatus.textContent === "Player X's turn"){
+    if (possMoves.includes(event.target) && turnStatus.textContent === "Democrats' turn") {
         let move = event.target;
-        move.innerHTML = "<img src= 'https://media1.tenor.com/images/a422941a831e161317fc7d118aa7fac6/tenor.gif?itemid=4957875' height= 200px width= 200px>";
-        
+        move.innerHTML = "<img id='democrat' src ='Democrat.svg'></img>";
         notPossMoves.push(move);
         xMoves.push(move);
-        possMoves.push(possMoves.splice(possMoves.indexOf(move), 1) [0]);
+        possMoves.push(possMoves.splice(possMoves.indexOf(move), 1)[0]);
         possMoves.pop();
         move.class = 1;
-        turnStatus.textContent = "Player O's turn";
-        console.log(move.class)
+        turnStatus.textContent = "Republicans' turn";
+        win()
     }
-    
+
     //AI random function
-    
-    if(turnStatus.textContent === "Player O's turn"){
-        let randomMove = possMoves[Math.floor(Math.random() * possMoves.length)];
-        randomMove.innerHTML = "<img src= 'https://media2.giphy.com/media/y8Mz1yj13s3kI/giphy.gif' width= 200px height= 200px></img>";    
-        notPossMoves.push(randomMove);
-        xMoves.push(randomMove);
-        possMoves.push(possMoves.splice(possMoves.indexOf(randomMove), 1) [0]);
-        possMoves.pop();
-        randomMove.class = 1;
-        turnStatus.textContent = "Player X's turn";
+
+    if (turnStatus.textContent === "Republicans' turn") {
+        setTimeout(delayAi, 2000)
+        function delayAi() {
+            let randomMove = possMoves[Math.floor(Math.random() * possMoves.length)];
+            randomMove.innerHTML = "<img id='republican' src='Republican.svg'></img>";
+            notPossMoves.push(randomMove);
+            oMoves.push(randomMove);
+            possMoves.push(possMoves.splice(possMoves.indexOf(randomMove), 1)[0]);
+            possMoves.pop();
+            randomMove.class = 10;
+            turnStatus.textContent = "Democrats' turn";
+            win()
+        }
     }
-    win()          
+
 }
 
 // 2 Player gameplay
-    
-function playTwoPlayer(event){
+
+function playTwoPlayer() {
 
     //Player X function
 
-    if (possMoves.includes(event.target) && turnStatus.textContent === "Player X's turn"){
+    if (possMoves.includes(event.target) && turnStatus.textContent === "Democrats' turn") {
         let move = event.target;
-        move.innerHTML = "<img src= 'https://media1.tenor.com/images/a422941a831e161317fc7d118aa7fac6/tenor.gif?itemid=4957875' height= 200px width= 200px></img>";
+        move.innerHTML = "<img id='democrat' src ='Democrat.svg'></img>";
         notPossMoves.push(move);
         xMoves.push(move);
-        possMoves.push(possMoves.splice(possMoves.indexOf(move), 1) [0]);
+        possMoves.push(possMoves.splice(possMoves.indexOf(move), 1)[0]);
         possMoves.pop();
         move.class = 1;
-        turnStatus.textContent = "Player O's turn";
-        console.log(move.class)
+        turnStatus.textContent = "Republicans' turn";
+        win()
     }
     //Player O function
-    if (possMoves.includes(event.target) && turnStatus.textContent === "Player O's turn"){
+    if (possMoves.includes(event.target) && turnStatus.textContent === "Republicans' turn") {
         let move = event.target;
-        move.innerHTML = "<img src= 'https://media2.giphy.com/media/y8Mz1yj13s3kI/giphy.gif' width= 200px height= 200px ></img>";
+        move.innerHTML = "<img id='republican' src='Republican.svg'></img>";
         notPossMoves.push(move);
         oMoves.push(move);
-        possMoves.push(possMoves.splice(possMoves.indexOf(move), 1) [0]);
+        possMoves.push(possMoves.splice(possMoves.indexOf(move), 1)[0]);
         possMoves.pop();
         move.class = 10;
-        turnStatus.textContent = "Player X's turn"
-    }  
-
-
-console.log(notPossMoves) //debug
-console.log(cellZero)
-
+        turnStatus.textContent = "Democrats' turn"
+        win()
+    }
 }
 
 
 //Winning Function
 
 function win() {
-    
-    winningCombos.forEach(function(solution){
+
+    winningCombos.forEach(function (solution) {
         let indexZero = solution[0].class;
         let indexOne = solution[1].class;
         let indexTwo = solution[2].class
-        if(parseInt(indexZero) + parseInt(indexOne) + parseInt(indexTwo) === 3){
-            turnStatus.textContent ="Player X wins"
+        if (parseInt(indexZero) + parseInt(indexOne) + parseInt(indexTwo) === 3) {
+            turnStatus.textContent = "Democrats Win! We all lose.";
+            restart.innerHTML = "<button id= 'restart-button' onClick='window.location.reload();'>Restart Game</button>";
+            cellOne.disabled = true;
+            cellTwo.disabled = true;
+            cellThree.disabled = true;
+            cellFour.disabled = true;
+            cellFive.disabled = true;
+            cellSix.disabled = true;
+            cellSeven.disabled = true;
+            cellEight.disabled = true;
+          
         }
-        else if(parseInt(indexZero) + parseInt(indexOne) + parseInt(indexTwo) === 30){
-            turnStatus.textContent ="Player O wins"
-        } 
-        else if(possMoves === []){
-            turnStatus.textContent="It's a draw!"
+        else if (parseInt(indexZero) + parseInt(indexOne) + parseInt(indexTwo) === 30) {
+            turnStatus.textContent = "Republicans Win! We all lose."
+            restart.innerHTML = "<button id= 'restart-button' onClick='window.location.reload();'>Restart Game</button>"
+            cellOne.disabled = true;
+            cellTwo.disabled = true;
+            cellThree.disabled = true;
+            cellFour.disabled = true;
+            cellFive.disabled = true;
+            cellSix.disabled = true;
+            cellSeven.disabled = true;
+            cellEight.disabled = true;
+         
+        }
+        else if (possMoves.length === 0) {
+            turnStatus.textContent = "It's a draw!"
+            restart.innerHTML = "<button id= 'restart-button' onClick='window.location.reload();'>Restart Game</button>"
+            cellOne.disabled = true;
+            cellTwo.disabled = true;
+            cellThree.disabled = true;
+            cellFour.disabled = true;
+            cellFive.disabled = true;
+            cellSix.disabled = true;
+            cellSeven.disabled = true;
+            cellEight.disabled = true;
+            
         }
     })
-
-
-
 }
+
+//Restart Function
+//function restartFunction(event) {
+//    restartButton = document.getElementById('restart-button')
+//    if (event.target === restartButton) {
+//        possMoves = [cellZero, cellOne, cellTwo, cellThree, cellFour, cellFive, cellSix, cellSeven, cellEight]
+//        notPossMoves = []
+//        xMoves = []
+//        oMoves = []
+//        possMoves.forEach((cells) => {
+//            cells.innerHTML = ""
+//            })
+//            console.log(possMoves)
+//    }
+//    restartButton.addEventListener('click', restartFunction)
+//}
+
 
 
 
