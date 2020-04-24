@@ -3,7 +3,7 @@ const app = express()
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
-app.use(express.static('.'))
+app.use(express.static('Public'))
 
 app.get('/', (req, res) => {
     res.sendFile("index.html")

@@ -89,7 +89,7 @@ function playOnePlayer() {
 
     if (possMoves.includes(event.target) && turnStatus.textContent === "Democrats' turn") {
         let move = event.target;
-        move.innerHTML = "<img id='democrat' src ='Democrat.svg'></img>";
+        move.innerHTML = "<img id='democrat' src ='/Images/Democrat.svg'></img>";
         notPossMoves.push(move);
         xMoves.push(move);
         possMoves.push(possMoves.splice(possMoves.indexOf(move), 1)[0]);
@@ -105,7 +105,7 @@ function playOnePlayer() {
         setTimeout(delayAi, 2000)
         function delayAi() {
             let randomMove = possMoves[Math.floor(Math.random() * possMoves.length)];
-            randomMove.innerHTML = "<img id='republican' src='Republican.svg'></img>";
+            randomMove.innerHTML = "<img id='republican' src='/Images/Republican.svg'></img>";
             notPossMoves.push(randomMove);
             oMoves.push(randomMove);
             possMoves.push(possMoves.splice(possMoves.indexOf(randomMove), 1)[0]);
@@ -126,7 +126,7 @@ function playTwoPlayer() {
 
     if (possMoves.includes(event.target) && turnStatus.textContent === "Democrats' turn") {
         let move = event.target;
-        move.innerHTML = "<img id='democrat' src ='Democrat.svg'></img>";
+        move.innerHTML = "<img id='democrat' src ='/Images/Democrat.svg'></img>";
         notPossMoves.push(move);
         xMoves.push(move);
         possMoves.push(possMoves.splice(possMoves.indexOf(move), 1)[0]);
@@ -138,7 +138,7 @@ function playTwoPlayer() {
     //Player O function
     if (possMoves.includes(event.target) && turnStatus.textContent === "Republicans' turn") {
         let move = event.target;
-        move.innerHTML = "<img id='republican' src='Republican.svg'></img>";
+        move.innerHTML = "<img id='republican' src='/Images/Republican.svg'></img>";
         notPossMoves.push(move);
         oMoves.push(move);
         possMoves.push(possMoves.splice(possMoves.indexOf(move), 1)[0]);
@@ -200,21 +200,6 @@ function win() {
     })
 }
 
-//Restart Function
-//function restartFunction(event) {
-//    restartButton = document.getElementById('restart-button')
-//    if (event.target === restartButton) {
-//        possMoves = [cellZero, cellOne, cellTwo, cellThree, cellFour, cellFive, cellSix, cellSeven, cellEight]
-//        notPossMoves = []
-//        xMoves = []
-//        oMoves = []
-//        possMoves.forEach((cells) => {
-//            cells.innerHTML = ""
-//            })
-//            console.log(possMoves)
-//    }
-//    restartButton.addEventListener('click', restartFunction)
-//}
 
 
 
